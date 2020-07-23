@@ -1,0 +1,161 @@
+{% extends "admin/change_form.html" %}{% load static %}
+
+{% block admin_change_form_document_ready %}
+    {{ block.super }}
+    <script>
+        // TODO preview
+        // $('iframe').attr('srcdoc', yourApiResponse )
+        (function($) {
+
+            let currentFocusedTextarea,
+                textareaSubject = document.querySelector("[name=subject]"),
+                textareaContent = document.querySelector("[name=body_content]"),
+                isTyping = false,
+                debounceTime = 1000,
+                timeout;
+
+            [textareaContent, textareaSubject].forEach(function(t){
+                t.addEventListener('focus', function(e){
+                    currentFocusedTextarea = e.currentTarget
+                });
+            })
+
+            function caretPosition(myElement){
+              var startPosition = myElement.selectionStart;
+              var endPosition = myElement.selectionEnd;
+
+              return {
+                start: startPosition,
+                end: endPosition,
+                length: myElement.value.length
+              }
+            }
+
+            var eventListener = function(e){
+                let focused = !!currentFocusedTextarea ? true : false,
+                    t = !!currentFocusedTextarea ? currentFocusedTextarea : document.querySelector("[name=subject]"),
+                    b = e.currentTarget,
+                    position = caretPosition(t);
+
+                e.preventDefault();
+                if(focused){
+                    t.value = t.value.substring(0, position.start)
+                        + " {" + "{ " + b.dataset.token + " }"+ "}"
+                        + t.value.substring(position.end, position.length);
+                    t.focus()
+                    t.selectionEnd = position.end + b.dataset.token.length + 7
+                }else {
+                    t.value = t.value + " {" + "{ " + b.dataset.token + " }" + "}"
+                    t.focus()
+                    t.selectionEnd = t.value.length
+                }
+                if(!isTyping){
+                    t.dispatchEvent(new Event('change', { 'bubbles': true }));
+                }
+            }
+
+            document.querySelectorAll(".add-btn").forEach(function(b){
+                b.addEventListener('click', eventListener);
+            })
+
+            var $variablesContainer = $('div#available_variables_container');
+            var $emailCodeSelect = $('#id_code')
+            var $bodyContent = $('#id_body_content');
+            var $subjectContent = $('#id_subject');
+            var $iFrameMailPreview = $('iframe#mail-preview-iframe');
+            var token = $('[name="csrfmiddlewaretoken"]').val();
+
+
+            var getAvailableVariablesForCode = function(emailCode){
+                $.ajax({
+                  'url': "{% url 'available-vars' %}?email_code="+emailCode,
+                  'type': 'GET',
+                  'headers': { "X-CSRFToken": token },
+                  'success': function(response) {
+                      if (response){
+                        $variablesContainer.empty();
+                        fillTemplateWithJson(response);
+                        //$variablesContainer.html(response);
+                        getEmailContentPreview(emailCode, $('textarea#id_body_content').val());
+                    }
+                  },
+                  'error': function(error) {
+                      console.log("ERROR", error);
+                  }
+                });
+            }
+
+            var fillTemplateWithJson = function (obj){
+                let container = document.querySelector("#available_variables_container");
+                Object.keys(obj).forEach(function(k){
+                    let link = document.createElement("a");
+                    link.href = "#";
+                    link.dataset.token = k;
+                    link.innerHTML = obj[k];
+                    container.append(link)
+                    container.append(" | ")
+
+                    link.addEventListener('click', eventListener);
+                });
+
+            }
+
+            var getEmailContentPreview = function(mailCode, mailContent){
+                $.ajax({
+                    'url': "{% url 'html-email-preview' %}",
+                    'type': 'POST',
+                    'data': {
+                        "email_code": mailCode,
+                        "content": mailContent,
+                        "subject": $subjectContent.val()
+                    },
+                      'headers': { "X-CSRFToken": token },
+                      'success': function(response) {
+                            if (response){
+                                $iFrameMailPreview.attr("srcdoc", response.rendered_content);
+                            }
+                      },
+                      'error': function(error) {
+                          console.log("ERROR", error);
+                      }
+                });
+            }
+            $emailCodeSelect.on("change", function (ev) {
+                var emailCode = $(ev.currentTarget).val();
+                if (emailCode){
+                    getAvailableVariablesForCode(emailCode);
+                }else{
+                    $variablesContainer.empty();
+                }
+            })
+
+            $bodyContent.on("change", function (ev) {
+                var mailContent = $(ev.currentTarget).val()
+                if (mailContent){
+                    getEmailContentPreview($emailCodeSelect.val(), mailContent);
+                }else{
+                    $iFrameMailPreview.attr("srcdoc", "")
+                }
+            })
+
+            $bodyContent.on('keyup', function(evt){
+                let $el = $(evt.currentTarget);
+                if(!isTyping) isTyping = true;
+                clearTimeout(timeout);
+                if(isTyping){
+                    timeout = setTimeout(function(){
+                        isTyping = false;
+                        var mailContent = $el.val()
+                        if (mailContent){
+                            getEmailContentPreview($emailCodeSelect.val(), mailContent);
+                        }else{
+                            $iFrameMailPreview.attr("srcdoc", "")
+                        }
+                    }, debounceTime)
+                }
+            });
+
+        })(window.django ? window.django.jQuery : window.jQuery);
+
+    </script>
+{% endblock %}
