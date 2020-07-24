@@ -42,10 +42,10 @@ class EmailBuilderAdmin(admin.ModelAdmin):
                     ("available_variables",),
                     ("subject",),
                     ("body_content",),
+                    ("mail_preview",)
                 ),
             },
         ),
-        ("Preview", {"fields": ("mail_preview",),}),
     ]
 
     @mark_safe
@@ -54,7 +54,7 @@ class EmailBuilderAdmin(admin.ModelAdmin):
             available_variables_link = ""
             for key, value in get_email_builder_handler().get_available_variables_by_email_code(email_code=obj.code).items():
                 available_variables_link += mark_safe(
-                    """<a class="add-btn folding__hook" href="#" data-token="{slug}">{label}</a>""".format(
+                    """ <a class="add-btn folding__hook" href="#" data-token="{slug}">{label}</a> """.format(
                         slug=key, label=value
                     )
                 )
@@ -121,13 +121,13 @@ class EmailBuilderAdmin(admin.ModelAdmin):
                     obj.html_content, obj.code
                 )
 
-                help_text = '<div class="help">%s</div>' % (
+                help_text = '<div class="help" style="margin-left: 0px!important;">%s</div>' % (
                     _("*I dati in questa preview sono fittizzi e del tutto casuali")
                 )
                 return strip_spaces_between_tags(
                     """{help_text}
-                    <div style="width:860px; height:500px;">
-                    <iframe id="mail-preview-iframe" style="margin-left:107px;" width="97%" height="480px" srcdoc="{mail_message}">
+                    <div>
+                    <iframe id="mail-preview-iframe" class="vLargeTextField" height="480px" srcdoc="{mail_message}">
                     PREVIEW
                     </iframe>
                     </div>""".format(

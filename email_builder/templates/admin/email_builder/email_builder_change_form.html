@@ -1,5 +1,42 @@
 {% extends "admin/change_form.html" %}{% load static %}
+{% block extrahead %}
+  {{ block.super }}
+  <style>
+  .folding__hook {
+  margin: 0.5rem 0.75rem;
+  padding: 0.33rem 0.75rem;
+  border-radius: 0.33rem;
+  border: 1px solid #aebfbc;
+  background-color: white;
+  transition: all 0.5s ease;
+}
 
+.folding__hook.is-active,
+.folding__hook:hover {
+  color: white;
+  text-decoration: none;
+}
+
+.folding__hook:hover {
+  background-color: #79aec8;
+  border-color: #79aec8;
+}
+
+.folding__hook.is-active {
+  background-color: #79aec8;
+  border-color: #79aec8;
+}
+
+#available_variables_container .folding__hook:first-child{
+  margin-left: 0;
+}
+
+.aligned .field-available_variables label + div.readonly {
+  margin-left: 160px;
+}
+
+  </style>
+{% endblock extrahead %}
 {% block admin_change_form_document_ready %}
     {{ block.super }}
     <script>
@@ -93,7 +130,9 @@
                     link.dataset.token = k;
                     link.innerHTML = obj[k];
                     link.classList.add("add-btn", "folding__hook")
+                    container.append(" ")
                     container.append(link)
+                    container.append(" ")
 
                     link.addEventListener('click', eventListener);
                 });
