@@ -92,8 +92,8 @@
                     link.href = "#";
                     link.dataset.token = k;
                     link.innerHTML = obj[k];
+                    link.classList.add("add-btn", "folding__hook")
                     container.append(link)
-                    container.append(" | ")
 
                     link.addEventListener('click', eventListener);
                 });

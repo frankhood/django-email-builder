@@ -2,6 +2,7 @@ import html
 import json
 import logging
 from functools import update_wrapper
+from django import forms
 
 import htmlentities
 from django.contrib import admin
@@ -53,7 +54,7 @@ class EmailBuilderAdmin(admin.ModelAdmin):
             available_variables_link = ""
             for key, value in get_email_builder_handler().get_available_variables_by_email_code(email_code=obj.code).items():
                 available_variables_link += mark_safe(
-                    """ <a class="add-btn" href="#" data-token="{slug}">{label}</a> |""".format(
+                    """<a class="add-btn folding__hook" href="#" data-token="{slug}">{label}</a>""".format(
                         slug=key, label=value
                     )
                 )
@@ -65,10 +66,13 @@ class EmailBuilderAdmin(admin.ModelAdmin):
     def formfield_for_dbfield(self, db_field, request, **kwargs):
         if db_field.name == "subject":
             kwargs.update({
+                "widget": forms.TextInput(attrs={"class": "vLargeTextField"}),
                 "label": _("Mail Subject"),
             })
         if db_field.name == "content":
-            kwargs.update({"label": _("Mail Body")})
+            kwargs.update({
+                "label": _("Mail Body")
+            })
         return super().formfield_for_dbfield(db_field, request, **kwargs)
 
     def description_shortened(self, instance):
