@@ -13,7 +13,7 @@ from email_builder.utils import get_email_builder_handler
 logger = logging.getLogger(__name__)
 
 
-class EmailPreviewTxt(viewsets.GenericViewSet):
+class EmailPreviewTxtViewSet(viewsets.GenericViewSet):
     serializer_class = EmailBuilderTxtSerializer
     permission_classes = [permissions.AllowAny]
 
@@ -25,7 +25,7 @@ class EmailPreviewTxt(viewsets.GenericViewSet):
         )
 
 
-class EmailPreviewHtml(viewsets.GenericViewSet):
+class EmailPreviewHtmlViewSet(viewsets.GenericViewSet):
     serializer_class = EmailBuilderHtmlSerializer
     permission_classes = [permissions.AllowAny]
 
@@ -37,7 +37,7 @@ class EmailPreviewHtml(viewsets.GenericViewSet):
         )
 
 
-class EmailPreviewAvailableVariables(viewsets.GenericViewSet):
+class EmailPreviewAvailableVariablesViewSet(viewsets.GenericViewSet):
     permission_classes = [permissions.AllowAny]
 
     def get_available_vars(self, request, *args, **kwargs):

@@ -1,6 +1,17 @@
 import factory, factory.django, factory.fuzzy
 
+from email_builder.models import EmailBuilder
+from email_builder.models import email_code_choices
 from tests.polls.models import Question, Choice
+
+
+class EmailBuilderFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = EmailBuilder
+
+    code = factory.fuzzy.FuzzyChoice(email_code_choices)
+    subject = factory.Faker("paragraph")
+    content = factory.Faker("paragraph")
 
 
 class QuestionFactory(factory.django.DjangoModelFactory):

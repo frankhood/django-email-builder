@@ -81,39 +81,6 @@ class EmailBuilder(models.Model):
     def name(self):
         return self.get_code_display()
 
-    # def clean(self):
-    #     self.libs_loaded = self.libs_loaded or utils.get_default_libs_loaded()
-    #     self.extends_template = self.extends_template or get_email_builder_handler().get_base_txt_template()
-    #     self.extends_html_template = self.extends_html_template or get_email_builder_handler().get_base_html_template()
-    #     mail_content = get_email_builder_handler().get_mail_template(
-    #         self.body_content,
-    #         mail_tmpl=get_email_builder_handler().MAIL_TXT_BLOCKS,
-    #         template=self.extends_template,
-    #         libs_loaded=self.libs_loaded
-    #     )
-    #     if self.body_content:
-    #         self.body_html_content = self.body_content.replace("\n", "<br>")
-    #     mail_html_content = get_email_builder_handler().get_mail_template(
-    #         self.body_html_content,
-    #         mail_tmpl=get_email_builder_handler().MAIL_HTML_BLOCK,
-    #         template=self.extends_html_template,
-    #         libs_loaded=self.libs_loaded
-    #     )
-    #     try:
-    #         validate_template_syntax(mail_content)
-    #     except ValidationError as ex:
-    #         raise ValidationError({"body_content": ex.message})
-    #
-    #     try:
-    #         validate_template_syntax(mail_html_content)
-    #     except ValidationError as ex:
-    #         raise ValidationError({"body_html_content": ex.message})
-    #
-    #     self.content = mail_content
-    #     self.html_content = mail_html_content
-    #
-    #     return super().clean()
-
     @classmethod
     def get_available_variables(cls):
         return utils.get_email_code_context()
