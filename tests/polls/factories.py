@@ -9,6 +9,7 @@ class EmailBuilderFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = EmailBuilder
 
+    description = factory.Faker("paragraph")
     code = factory.fuzzy.FuzzyChoice(email_code_choices)
     subject = factory.Faker("paragraph")
     content = factory.Faker("paragraph")

@@ -21,7 +21,6 @@ class MailBuilderContextHandler(object):
     MAIL_HTML_BLOCK = """{% extends '$extends_tmpl' %}{% load $loaded_libs %}
     {% block title %}$subject{% endblock title %}{% block content %}$body{% endblock %}"""
 
-
     @classmethod
     def get_base_txt_template(cls):
         return base_raw_template_choices[0][0]
@@ -47,9 +46,7 @@ class MailBuilderContextHandler(object):
             }
         }
         """
-        # raise NotImplementedError(
-        #     "Please create your handler inheriting from MailBuilderContextHandler"
-        # )
+
         return {}
 
     @classmethod
@@ -85,26 +82,18 @@ class MailBuilderContextHandler(object):
     @classmethod
     def get_mail_template(cls, content, subject=None, mail_tmpl=None, template=None, libs_loaded=None):
         return Template(mail_tmpl).substitute(
-            extends_tmpl=template,
-            loaded_libs=" ".join(libs_loaded),
-            subject=subject,
-            body=content
+            extends_tmpl=template, loaded_libs=" ".join(libs_loaded), subject=subject, body=content
         )
-
 
     @classmethod
     def get_rendered_mail(cls, email_content, email_code):
         from django.template import engines
+
         # @TODO Change me and take the first that returns something in a for cycle (see DjangoTemplateResponseMixin)
         return strip_spaces_between_tags(
-            engines.all()[0].from_string(
-                email_content
-            ).render(
-                context=cls.get_context_by_email_code(
-                    email_code
-                )
-            )
+            engines.all()[0].from_string(email_content).render(context=cls.get_context_by_email_code(email_code))
         )
+
 
 # class BaseMail:
 #     code = None
