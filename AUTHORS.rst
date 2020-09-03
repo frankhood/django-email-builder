@@ -10,4 +10,5 @@ Development Lead
 Contributors
 ------------
 
-d.ria@frankhood.it
+* d.ria@frankhood.it
+* g.donghia@frankhood.it

@@ -11,7 +11,7 @@ Django Email Builder
 .. image:: https://codecov.io/gh/frankhood/django-email-builder/branch/master/graph/badge.svg
     :target: https://codecov.io/gh/frankhood/django-email-builder
 
-Useful 
+Useful
 
 Documentation
 -------------
@@ -31,7 +31,7 @@ Add it to your `INSTALLED_APPS`:
 
     INSTALLED_APPS = (
         ...
-        'email_builder.apps.EmailBuilderConfig',
+        'email_builder',
         ...
     )
 
@@ -71,8 +71,6 @@ Development commands
 ::
 
     pip install -r requirements_dev.txt
-    invoke -l
-
 
 Credits
 -------
