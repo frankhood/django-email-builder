@@ -1,0 +1,14 @@
+version: '3.6'
+
+services:
+  db:
+    image: nouchka/sqlite3
+  tox:
+    build: .
+    command: tox
+    volumes:
+      - .:/django-email-builder
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db

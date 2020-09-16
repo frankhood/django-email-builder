@@ -3,20 +3,15 @@ FROM python:3.6
 FROM python:3.7
 FROM python:3.8
 
-COPY . /python35/
-COPY . /python36/
-COPY . /python37/
-COPY . /python38/
-RUN pip install virtualenv
-RUN virtualenv python35
-CMD source python35/bin/activate
-RUN virtualenv python36
-CMD source python36/bin/activate
-RUN virtualenv python37
-CMD source python37/bin/activate
-RUN virtualenv python38
-CMD source python38/bin/activate
+ENV PYTHONBUFFERED 1
+
+RUN mkdir /django-email-builder/
+WORKDIR /django-email-builder
 COPY . /django-email-builder/
-CMD pip install tox
-CMD python setup.py sdist
-CMD tox
+RUN pip install -r requirements_test.txt
+RUN python35 -m venv py35
+RUN python36 -m venv py36
+RUN python37 -m venv py37
+RUN python38 -m venv py38
+
+
