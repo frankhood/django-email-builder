@@ -3,7 +3,8 @@ mock
 flake8
 tox
 codecov
-tox-docker
+
+
 virtualenv
 pytest
 django-post-office
