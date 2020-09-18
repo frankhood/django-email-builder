@@ -9,7 +9,7 @@ python:
   - "3.8"
 
 env:
-  - DJANOG="2.2"
+  - DJANGO="2.2"
 
 matrix:
   fast_finish: true
