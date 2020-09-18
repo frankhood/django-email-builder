@@ -133,14 +133,10 @@ Development commands
 
     pip install -r requirements_dev.txt
 
-.. toctree::
-    :maxdepth: 2
-    .CONTRIBUTING.rst
-    .AUTHORS.rst
 
-.. include:: ../CONTRIBUTING.rst
+.. include:: .CONTRIBUTING.rst
 
-.. include:: ../AUTHORS.rst
+.. include:: .AUTHORS.rst
 
 Tools used in rendering this package:
 
