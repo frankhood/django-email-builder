@@ -1,6 +1,5 @@
-============
 Contributing
-============
+---------------------
 
 Contributions are welcome, and they are greatly appreciated! Every
 little bit helps, and credit will always be given.
@@ -11,7 +10,7 @@ Types of Contributions
 ----------------------
 
 Report Bugs
-~~~~~~~~~~~
+---------------------
 
 Report bugs at https://github.com/frankhood/django-email-builder/issues.
 
@@ -22,13 +21,13 @@ If you are reporting a bug, please include:
 * Detailed steps to reproduce the bug.
 
 Fix Bugs
-~~~~~~~~
+---------------------
 
 Look through the GitHub issues for bugs. Anything tagged with "bug"
 is open to whoever wants to implement it.
 
 Implement Features
-~~~~~~~~~~~~~~~~~~
+---------------------
 
 Look through the GitHub issues for features. Anything tagged with "feature"
 is open to whoever wants to implement it.
@@ -48,14 +47,14 @@ is open to whoever wants to implement it.
 • EmailTemplateBlock Inline multilanguage
 
 Write Documentation
-~~~~~~~~~~~~~~~~~~~
+---------------------
 
 Django Email Builder could always use more documentation, whether as part of the
 official Django Email Builder docs, in docstrings, or even on the web in blog posts,
 articles, and such.
 
 Submit Feedback
-~~~~~~~~~~~~~~~
+---------------------
 
 The best way to send feedback is to file an issue at https://github.com/frankhood/django-email-builder/issues.
 
@@ -67,7 +66,7 @@ If you are proposing a feature:
   are welcome :)
 
 Get Started!
-------------
+---------------------
 
 Ready to contribute? Here's how to set up `django-email-builder` for local development.
 
