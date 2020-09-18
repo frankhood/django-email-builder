@@ -1,16 +1,12 @@
 version: '3'
 
 services:
-  db:
-    image: nouchka/sqlite3
   tox:
     build:
       context: .
       dockerfile: Dockerfile
-    volumes:
-      - .:/django-email-builder
+    # volumes:
+    #   - .:/app
     command: tox
-    ports:
-      - "8000:8000"
-    depends_on:
-      - db
+    # ports:
+    #   - "8000:8000"
