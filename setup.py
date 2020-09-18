@@ -20,8 +20,7 @@ def get_version(*file_paths):
     raise RuntimeError("Unable to find version string.")
 
 
-version = "0.1.0"
-
+version = get_version("email_builder", "__init__.py")
 
 if sys.argv[-1] == "publish":
     try:
@@ -43,26 +42,25 @@ if sys.argv[-1] == "tag":
 
 readme = open("README.rst").read()
 history = open("HISTORY.rst").read().replace(".. :changelog:", "")
-requirements = open("requirements.txt").readlines()
+# requirements = open("requirements_test.txt").readlines()
 
 setup(
     name="django-email-builder",
     version=version,
-    description="""Useful """,
+    description="""You will change email template directly from admin of email builder with easy insert django variables in text""",
     long_description=readme + "\n\n" + history,
     author="Django Email Builder",
     author_email="info@frankhood.it",
     url="https://github.com/frankhood/django-email-builder",
     packages=["email_builder",],
     include_package_data=True,
-    install_requires=requirements,
+    install_requires=[],
     license="Apache Software License 2.0",
     zip_safe=False,
     keywords="django-email-builder",
     classifiers=[
-        "Development Status :: 3 - Alpha",
-        "Framework :: Django :: 1.11",
-        "Framework :: Django :: 2.1",
+        "Development Status :: 3 - Prod",
+        "Framework :: Django :: 2.2",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: BSD License",
         "Natural Language :: English",

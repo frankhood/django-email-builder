@@ -9,6 +9,7 @@ Tests for `django-email-builder` models module.
 """
 import datetime
 import importlib
+import sys
 from unittest.mock import patch
 
 from django.conf import settings
@@ -29,6 +30,12 @@ from .polls.factories import EmailBuilderFactory
 class TestEmailBuilder(TestCase):
     def setUp(self):
         self.api_client = APIClient()
+
+    def test_python_version(self):
+        # =======================================================================
+        # python manage.py test tests.test_models.TestEmailBuilder.test_python_version  --settings=tests.test_settings
+        # =======================================================================
+        print("PYTHON VERSION => ", sys.version)
 
     def test_wysiwyg_api(self):
         # =======================================================================
