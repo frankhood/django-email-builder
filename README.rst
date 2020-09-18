@@ -134,9 +134,9 @@ Development commands
     pip install -r requirements_dev.txt
 
 
-.. include:: .CONTRIBUTING.rst
+.. include:: ./CONTRIBUTING.rst
 
-.. include:: .AUTHORS.rst
+.. include:: ./AUTHORS.rst
 
 Tools used in rendering this package:
 
