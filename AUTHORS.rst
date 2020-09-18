@@ -5,7 +5,8 @@ Credits
 Development Lead
 ----------------
 
-* Django Email Builder <info@frankhood.it>
+* Frankhood Business Solutions s.r.l <info@frankhood.it>
+* https://frankhood.it/
 
 Contributors
 ------------
