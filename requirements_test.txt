@@ -5,7 +5,6 @@ tox
 codecov
 
 
-virtualenv
 pytest
 django-post-office
 django
@@ -13,5 +12,4 @@ djangorestframework
 factory-boy
 faker
 htmlentities
-mysqlclient
 django-extensions

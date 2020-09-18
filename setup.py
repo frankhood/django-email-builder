@@ -47,7 +47,7 @@ history = open("HISTORY.rst").read().replace(".. :changelog:", "")
 setup(
     name="django-email-builder",
     version=version,
-    description="""You will change email template directly from admin of email builder with easy insert django variables in text""",
+    description="""A Django app for smart customizable email templates.""",
     long_description=readme + "\n\n" + history,
     author="Django Email Builder",
     author_email="info@frankhood.it",
