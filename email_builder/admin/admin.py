@@ -16,11 +16,6 @@ from email_builder.models import EmailBuilder, email_code_choices
 from email_builder.views import EmailBuilderHtmlPreview, EmailBuilderTxtPreview
 from email_builder.utils import get_email_builder_handler
 
-from django import template
-from django.template.context import Context
-
-register = template.Library()
-
 logger = logging.getLogger("email_builder")
 
 
@@ -30,7 +25,6 @@ class EmailBuilderAdmin(admin.ModelAdmin):
     list_display = ("code", "description_shortened", "subject", "created")
     search_fields = ("code", "description", "subject")
     change_form_template = "admin/email_builder/email_builder_change_form.html"
-    save_as = True
     readonly_fields = (
         "content",
         "html_content",
@@ -52,6 +46,12 @@ class EmailBuilderAdmin(admin.ModelAdmin):
             },
         ),
     ]
+
+    def render_change_form(self, request, context, add=False, change=False, form_url='', obj=None):
+        context.update({
+            "save_as_new": False
+        })
+        return super().render_change_form(request, context, add, change, form_url, obj)
 
     @mark_safe
     def available_variables(self, obj=None):
