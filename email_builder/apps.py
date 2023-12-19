@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class DeliberationConfig(AppConfig):
-    name = "django-email-builder.email_builder"
+class EmailBuilderConfig(AppConfig):
+    name = "email_builder"
