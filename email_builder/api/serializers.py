@@ -7,7 +7,7 @@ import htmlentities
 from django.core.exceptions import ValidationError
 from django.template import engines
 from django.utils.html import strip_spaces_between_tags
-from django.utils.translation import ugettext, ugettext_lazy as _
+from django.utils.translation import gettext, gettext_lazy as _
 from rest_framework import serializers
 
 from email_builder import utils

@@ -1,7 +1,7 @@
 import logging
 
 from django.conf.urls import url
-from django.utils.translation import ugettext, ugettext_lazy as _
+from django.utils.translation import gettext, gettext_lazy as _
 
 from . import views
 

@@ -5,7 +5,7 @@ import django_extensions.db.fields.json
 import email_builder.utils
 
 from email_builder import utils
-from django.utils.translation import ugettext, ugettext_lazy as _
+from django.utils.translation import gettext, gettext_lazy as _
 
 email_code_choices = [(x, _(y)) for x, y in utils.get_email_code_choices()]
 language_choices = [(x, _(y)) for x, y in utils.get_email_languages()]

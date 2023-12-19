@@ -3,7 +3,7 @@
 """
 import logging
 
-from django.utils.translation import ugettext, ugettext_lazy as _
+from django.utils.translation import gettext, gettext_lazy as _
 from rest_framework import mixins, generics, status, viewsets, permissions
 from rest_framework.response import Response
 

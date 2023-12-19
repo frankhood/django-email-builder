@@ -3,7 +3,7 @@ import logging
 from django.core.exceptions import ValidationError
 from django.utils.html import strip_spaces_between_tags
 from string import Template
-from django.utils.translation import ugettext, ugettext_lazy as _
+from django.utils.translation import gettext, gettext_lazy as _
 from post_office.validators import validate_template_syntax
 
 from . import utils

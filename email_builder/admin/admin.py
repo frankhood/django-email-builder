@@ -9,7 +9,7 @@ from django.contrib import admin
 from django.utils.html import strip_spaces_between_tags, escape
 from django.utils.safestring import mark_safe
 from django.utils.text import Truncator
-from django.utils.translation import ugettext, ugettext_lazy as _
+from django.utils.translation import gettext, gettext_lazy as _
 
 from email_builder.admin.admin_forms import EmailBuilderForm
 from email_builder.models import EmailBuilder, email_code_choices

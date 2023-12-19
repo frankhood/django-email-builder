@@ -6,7 +6,7 @@ import logging
 from django.template import TemplateDoesNotExist
 from django.template.loader import _engine_list
 from django.template.response import SimpleTemplateResponse
-from django.utils.translation import ugettext, ugettext_lazy as _
+from django.utils.translation import gettext, gettext_lazy as _
 from django.views.generic import DetailView
 from django.views.generic.base import TemplateResponseMixin
 from django.views.generic.detail import BaseDetailView
